@@ -75,10 +75,6 @@ function conf_devstack(){
   su $user <<EOSU
   cat <<EOF >> $devstack_path/local.conf
 [[local|localrc]]
-  FLOATING_RANGE=192.168.1.224/27
-  FIXED_RANGE=10.11.12.0/24
-  FIXED_NETWORK_SIZE=256
-  FLAT_INTERFACE=eth0
   ADMIN_PASSWORD=secrete
   DATABASE_PASSWORD=secrete
   RABBIT_PASSWORD=secrete
