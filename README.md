@@ -12,7 +12,17 @@ If you are executing the script from command-line (./stackr.sh) then you can pas
 using named parameters. To learn more about the script usage do this:
  
 ```
-./stackr.sh -h
+# ./stackr.sh -h
+
+Usage: ./stackr.sh [OPTIONS]
+
+--user=user                 Linux user
+--gerrit-username=username  Gerrit username
+--gerrit-email=email        Gerrit email address
+--gerrit-fullname=fullname  Your Full name (Use double quotes if spaces between names)
+--with-devstack             Install devstack (default is yes)
+--devstack-path=path        Devstack installation path (default is /opt/devstak)
+
 ```
 
 
