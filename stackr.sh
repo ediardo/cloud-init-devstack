@@ -9,7 +9,7 @@ user=
 gerrit_username=
 # Your email address 
 gerrit_email=
-# Your FUll Name
+# Your FUll Name (USE DOUBLE QUOTES)
 gerrit_fullname=
 # Install Devstack 
 with_devstack=1
@@ -72,8 +72,9 @@ function conf_devstack(){
   echo '===[ Configuring devstack ] ================================'
   adduser --disabled-password --gecos "" stack
   echo "stack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-  su stack <<EOSU
   git clone https://git.openstack.org/openstack-dev/devstack $devstack_path
+  chown -R stack $devstack_path
+  su stack <<EOSU
   cat <<EOF >> $devstack_path/local.conf
 [[local|localrc]]
   FLOATING_RANGE=192.168.1.224/27
