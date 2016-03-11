@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Originally developed by Szymon Wróblewski and extended by Eddie Ramirez.
 readonly script_version=0.2
@@ -16,10 +16,11 @@ with_devstack=1
 # Devstack Installation Path
 devstack_path=/opt/devstack
 
-function print_version() {
+function print_version(){
   echo "stackr.sh version is ${script_version}"
 }
-function usage() {
+
+function usage(){
   echo "Usage: $0 [OPTIONS]"
   echo ""
   echo "--user=user"
@@ -30,7 +31,7 @@ function usage() {
   echo ""
 }
 
-function conf_access() {
+function conf_access(){
   echo '===[ Configuring access ] =================================='
   adduser --disabled-password --gecos "" $user
   cp -r /home/ubuntu/.ssh /home/$user/
@@ -41,7 +42,7 @@ function conf_access() {
 #  service ssh restart
 }
 
-function conf_pkgs() {
+function conf_pkgs(){
   echo '===[ Configuring packages ] ================================'
   apt-get update
   apt-get upgrade
@@ -55,7 +56,7 @@ function conf_pkgs() {
 EOF
 }
 
-function conf_gerrit() {
+function conf_gerrit(){
   apt-get install -y git git-review
   echo '===[ Configuring gerrit ] =================================='
   su $user <<EOSU
@@ -73,7 +74,7 @@ EOF
 EOSU
 }
 
-function conf_devstack() {
+function conf_devstack(){
   echo '===[ Configuring devstack ] ================================'
   adduser --disabled-password --gecos "" stack
   echo "stack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -93,22 +94,6 @@ function conf_devstack() {
   disable_service n-net
   # Enable Neutron
   ENABLED_SERVICES+=,q-svc,q-dhcp,q-meta,q-agt,q-l3
-
-
-  ## Neutron options
-  Q_USE_SECGROUP=True
-  FLOATING_RANGE="172.18.161.0/24"
-  FIXED_RANGE="10.0.0.0/24"
-  Q_FLOATING_ALLOCATION_POOL=start=172.18.161.250,end=172.18.161.254
-  PUBLIC_NETWORK_GATEWAY="172.18.161.1"
-  Q_L3_ENABLED=True
-  PUBLIC_INTERFACE=eth0
-
-  # Open vSwitch provider networking configuration
-  Q_USE_PROVIDERNET_FOR_PUBLIC=True
-  OVS_PHYSICAL_BRIDGE=br-ex
-  PUBLIC_BRIDGE=br-ex
-  OVS_BRIDGE_MAPPINGS=public:br-ex
 
 EOF
   chmod -R 777 $devstack_path
