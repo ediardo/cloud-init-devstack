@@ -23,12 +23,14 @@ function print_version(){
 function usage(){
   echo "Usage: $0 [OPTIONS]"
   echo ""
-  echo "--user=user"
-  echo "--gerrit-username=username"
-  echo "--gerrit-email=email"
-  echo "--with-devstack"
-  echo "--devstack-path=path"
+  echo "--user=user                 Linux user"
+  echo "--gerrit-username=username  Gerrit username"
+  echo "--gerrit-email=email        Gerrit email address"
+  echo "--gerrit-fullname=fullname  Your Full name (Use double quotes if spaces between names)"
+  echo "--with-devstack             Install devstack (default is yes)"
+  echo "--devstack-path=path        Devstack installation path (default is /opt/devstak)"
   echo ""
+  exit 0
 }
 
 function conf_access(){
