@@ -8,7 +8,22 @@ This script creates some repetitive tasks for you, like:
 You can use this script with cloud-init or executing the script yourself.
 
 ## Cloud init
-If you are using cloud-init: make sure to modify the variables at the beggining of the script
+If you are using cloud-init: make sure to modify the variables at the beggining of the script.
+
+```
+# Linux user
+user=
+# Your gerrit username
+gerrit_username=
+# Your email address 
+gerrit_email=
+# Your FUll Name (USE DOUBLE QUOTES)
+gerrit_fullname=
+# Install Devstack 
+with_devstack=1
+# Devstack Installation Path
+devstack_path=/opt/devstack
+```
 
 ## Standalone mode 
 If you are executing the script from command-line (./stackr.sh) then you can pass the options
