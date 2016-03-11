@@ -70,11 +70,9 @@ EOSU
 
 function conf_devstack(){
   echo '===[ Configuring devstack ] ================================'
-  adduser --disabled-password --gecos "" stack
-  echo "stack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
   git clone https://git.openstack.org/openstack-dev/devstack $devstack_path
-  chown -R stack $devstack_path
-  su stack <<EOSU
+  chown -R $user $devstack_path
+  su $user <<EOSU
   cat <<EOF >> $devstack_path/local.conf
 [[local|localrc]]
   FLOATING_RANGE=192.168.1.224/27
