@@ -1,3 +1,4 @@
+# stackr.sh
 This script creates some repetitive tasks for you, like:
 * Creates a linux user 
 * Installs base packages for your Ubuntu VM
@@ -6,8 +7,10 @@ This script creates some repetitive tasks for you, like:
 
 You can use this script with cloud-init or executing the script yourself.
 
+## Cloud init
 If you are using cloud-init: make sure to modify the variables at the beggining of the script
 
+## Standalone mode 
 If you are executing the script from command-line (./stackr.sh) then you can pass the options
 using named parameters. To learn more about the script usage do this:
  
@@ -26,7 +29,7 @@ Usage: ./stackr.sh [OPTIONS]
 ```
 
 
-Authors:
+### Authors:
 
 Originally developed by Szymon Wróblewski (http://pastebin.com/nVxss5H0) and extended functionality by Eddie Ramirez (https://github.com/ediardo/cloud-init-devstack)
 
