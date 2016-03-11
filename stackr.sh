@@ -91,7 +91,7 @@ function conf_devstack(){
   # Enable Neutron
   ENABLED_SERVICES+=,q-svc,q-dhcp,q-meta,q-agt,q-l3
 EOF
-  ${devstack_path}/stack.sh"
+  ${devstack_path}/stack.sh
 EOSU
   echo '===[ END ] ================================================='
 }
