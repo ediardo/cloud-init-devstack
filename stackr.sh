@@ -47,13 +47,7 @@ function conf_pkgs(){
   apt-get update
   apt-get upgrade
   apt-get install python-software-properties
-  apt-add-repository -y ppa:fish-shell/release-2
-  add-apt-repository -y ppa:webupd8team/java
   apt-get update
-  cat <<EOF | debconf-set-selections
-  debconf shared/accepted-oracle-license-v1-1 select true
-  debconf shared/accepted-oracle-license-v1-1 seen true
-EOF
 }
 
 function conf_gerrit(){
@@ -78,9 +72,10 @@ function conf_devstack(){
   echo '===[ Configuring devstack ] ================================'
   adduser --disabled-password --gecos "" stack
   echo "stack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+  su stack <<EOSU
   git clone https://git.openstack.org/openstack-dev/devstack $devstack_path
   cat <<EOF >> $devstack_path/local.conf
-  [[local|localrc]]
+[[local|localrc]]
   FLOATING_RANGE=192.168.1.224/27
   FIXED_RANGE=10.11.12.0/24
   FIXED_NETWORK_SIZE=256
@@ -94,10 +89,9 @@ function conf_devstack(){
   disable_service n-net
   # Enable Neutron
   ENABLED_SERVICES+=,q-svc,q-dhcp,q-meta,q-agt,q-l3
-
 EOF
-  chmod -R 777 $devstack_path
-  su - stack -c "$devstack_path/stack.sh"
+  ${devstack_path}/stack.sh"
+EOSU
   echo '===[ END ] ================================================='
 }
 
